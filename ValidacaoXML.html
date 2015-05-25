@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<link href="style.css" rel="stylesheet" type="text/css">
+		<title>Valida&Ccedil;&Acirc;o</title>
+		<meta charset="utf-8">
+		<script type="text/javascript"
+			src="scripts/xmllint.js">			
+		</script>
+		<script type="text/javascript"
+			src="Schemas.js">			
+		</script>
+		<script type="text/javascript"
+			src="scripts/jquery.js">			
+		</script>
+	</head>
+	<body class="validator">
+		<a href="index.html">Regressar à Aplicação</a><p/>
+		<legend>Schema Utilizadores</legend>
+		<textarea id="userSchemaArea" class="schema"></textarea>
+		<legend>Schema Rotas</legend>
+		<textarea id="rotasSchemaArea" class="schema"></textarea>
+		<legend>Schema Pontos de Interesse</legend>
+		<textarea id="interesseSchemaArea" class="schema"></textarea>
+		<br/><button onclick="botaoValidar()">Validar</button>
+		<legend>Output</legend>
+		<textarea id="output" readonly="true" class="schema"></textarea>
+	</body>
+</html>

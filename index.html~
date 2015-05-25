@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>Planeador de Caminhadas</title>
+  	<link href="style.css" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<meta charset="utf-8">
+    
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB7lX52Zb-Nn6ANXkm5xdOw_Dlvf3XZX0I&sensor=false">
+    </script>
+    <script type="text/javascript"
+    		src="maps.js">      
+    </script>
+    <script type="text/javascript"
+    		src="users.js">      
+    </script>
+    <script type="text/javascript"
+    		src="rotas.js">      
+    </script>
+    <script type="text/javascript"
+    		src="scripts/jquery.js">      
+    </script>
+     <script type="text/javascript"
+    		src="scripts/jquery.validate.min.js">      
+    </script>
+  </head>
+    <script type="text/javascript"
+    		src="intermedios.js">      
+    </script>
+  
+  <body>    
+  	<h1>Planeador de Caminhadas e Calculador Calorias</h1>
+	<div class="formulario">
+		<form id="users">
+				<fieldset >
+						<legend align="center"><b> Dados do Utilizador </b> </legend>
+						<label id="labelUtilizador">Utilizador:</label>
+						<select onchange="checkComboBoxUsers()" id="comboUser">
+							<option value="selecione">-- Selecione --</option>
+							<option value="novo">-- Novo --</option>						
+						</select>
+					<div id="camposUser">
+						<div class="campo">
+							<label id="labelNome">Nome:</label>
+							<input type="text" id="nome">
+						</div>
+						<div class="campo">
+							<label id="labelIdade">Idade:</label>
+							<input type="text" id="idade" name="idade">
+						</div>
+						<div class="campo">
+							<label id="labelAltura">Altura:</label>
+							<input type="text" id="altura" name="altura">
+							<label id="labelCM">Cm.</label>
+						</div>
+						<div class="campo">
+							<label id="labelSexo">Sexo:</label>
+							<select id="sexo">
+								<option value="M">Masculino</option>
+								<option value="F">Feminino</option>
+							</select>
+						</div>
+						<div class="campo">
+							<label id="labelPeso">Peso:</label>
+							<input type="text" id="peso" name="peso">
+							<label id="labelKg">Kg.</label>
+						</div>
+						<input type="button" id="botaoAdicionarUser" value="Gravar Dados"  />
+						<input type="button" id="botaoActualizarUser" value="Actualizar Dados"  />
+						<input type="button" id="botaoEliminarUser" value="Eliminar Dados" onclick="submitEliminarUser()" />
+					</div>
+				</fieldset>
+				<fieldset >
+					<legend align="center"><b>Escolher a Rota</b>  </legend>
+					<label id="labelRotas">Rota:</label>
+					<select size="1" id="rotas" onchange="checkComboBoxRotas()">
+						<option value="selecione">-- Selecione --</option>
+						<option value="novo">-- Novo --</option>
+					</select>
+					<div id="camposRota">
+						<div class="campo">
+							<label id="labelNomeRota">Nome:</label>
+							<input type="text" id="nomeRota">
+						</div>
+						<div class="origem campo">
+							<label id="labelOrigem">Origem:</label>
+							<input type="text" id="origem" readonly="readonly">
+							<img src="imagens/icon-remove.png" class="remove" value="0"></img>
+							<img src="imagens/save.png" class="save" value="0"></img>
+						</div>
+						<div class="interesse1 campo">
+							<label >Intermedio:</label>
+							<input type="text" id="interesse1"  readonly="readonly">
+							<img src="imagens/icon-remove.png" class="remove" value="1"></img>
+							<img src="imagens/save.png" class="save" value="1"></img>
+						</div>
+						<div class="interesse2 campo">
+							<label >Intermedio:</label>
+							<input type="text" id="interesse2"  readonly="readonly">
+							<img src="imagens/icon-remove.png" class="remove" value="2"></img>
+							<img src="imagens/save.png" class="save" value="2"></img>
+						</div>
+						<div class="interesse3  campo">
+							<label >Intermedio:</label>
+							<input type="text" id="interesse3"  readonly="readonly">
+							<img src="imagens/icon-remove.png" class="remove" value="3"></img>
+							<img src="imagens/save.png" class="save" value="3"></img>
+						</div>
+						<div class="interesse4 campo">
+							<label >Intermedio:</label>
+							<input type="text" id="interesse4" readonly="readonly" >
+							<img src="imagens/icon-remove.png" class="remove" value="4"></img>
+							<img src="imagens/save.png" class="save" value="4"></img>
+						</div>
+						<div class="interesse5 campo">
+							<label >Intermedio:</label>
+							<input type="text" id="interesse5" readonly="readonly" >
+							<img src="imagens/icon-remove.png" class="remove" value="5"></img>
+							<img src="imagens/save.png" class="save" value="5"></img>
+						</div>
+						<div class="interesse6 campo">
+							<label >Intermedio:</label>
+							<input type="text" id="interesse6" readonly="readonly" >
+							<img src="imagens/icon-remove.png" class="remove" value="6"></img>
+							<img src="imagens/save.png" class="save" value="6"></img>
+						</div>
+						<div class="interesse7 campo">
+							<label >Intermedio:</label>
+							<input type="text" id="interesse7" readonly="readonly" >
+							<img src="imagens/icon-remove.png" class="remove" value="7"></img>
+							<img src="imagens/save.png" class="save" value="7"></img>
+						</div>
+						<div class="interesse8 campo">
+							<label >Intermedio:</label>
+							<input type="text" id="interesse8" readonly="readonly" >
+							<img src="imagens/icon-remove.png" class="remove" value="8"></img>
+							<img src="imagens/save.png" class="save" value="8"></img>
+						</div>
+						<div class="destino campo">
+							<label id="labelDestino">Destino:</label>
+							<input type="text" id="destino" readonly="readonly" >
+							<img src="imagens/icon-remove.png" class="remove" value="9"></img>
+							<img src="imagens/save.png" class="save" value="9"></img>
+						</div>
+						<input type="button" id="botaoAdicionarRota" onclick="submitRota()" value="Adicionar Rota">
+						<input type="button" id="botaoActualizarRota" value="Actualizar Rota">
+						<input type="button" id="botaoEliminarRota" onclick="submitEliminarRota()" value="Eliminar Rota">
+					</div>
+				</fieldset>
+		</form>	
+	</div>
+	<div id="map-container">		
+		<div id="map-canvas" align="center"></div>
+		<div id="pontos-interesse">
+			<div id="locais" class="lista"><h6>Locais</h6></div>
+			<div id="restaurantes" class="lista"><h6>Restaurantes</h6></div>
+		</div>
+	</div>
+	<div id="instrucoes" >
+		<div id="estaticos">
+			
+		</div>
+		<div id="dinamicos">
+			<div id="header">Instruções:</div>
+			<ul></ul>
+		</div>
+	</div>
+	<div id="form_interesse">
+		<div class="campo">
+			<label>Nome:</label>
+			<input type="text" id="nome_ponto">
+		</div>
+		<div class="campo">
+			<label>Tipo:</label>
+			<select size="1" id="tipo_ponto">
+				<option selected="selected" value="local">Local</option>
+				<option value="restaurante">Restaurante</option>
+			</select>
+		</div>
+		<div class="campo">
+			<label>Descrição:</label>
+			<textarea id="desc_ponto" ></textarea>	
+		</div>
+		
+		<input type="hidden" id="lat_ponto">
+		<input type="hidden" id="lng_ponto">
+		<input type="hidden" id="update_ponto">
+		<input type="hidden" id="pos_ponto">
+		<input type="hidden" id="value_ponto">
+		
+		<input type="button" value="Cancelar" id="cancelar_ponto">
+		<input type="button" value="Guardar" id="guardar_ponto">
+	</div>
+  </body>  
+</html>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#camposRota").hide();
+		$("#camposUser").hide();
+		$("#instrucoes").hide();
+		for(var i=1;i<9;i++)
+		{
+			var id=".interesse"+i;
+			
+			$(id).hide();
+		}
+	});	
+	$(".remove").click(function(){	
+		var value=$(this).attr("value");
+		
+		removerCampoRota(value);
+		
+		if(value==0 || value==9){
+			if(G_pontos.length>1)desenhaRota();
+			else{G_directionsResult.setMap(null);
+    			G_directionsResult=null;}
+		}
+		else{
+			
+			desenhaRota();
+		}
+	});
+	$("body").click(function(){
+		$("#form_interesse").css("display","none");
+	});
+	$("#form_interesse").click(function(){
+		event.stopPropagation();
+	});
+	
+	$(".save").click(function(){	
+		event.stopPropagation();
+		var value=$(this).attr("value");
+		var descricao="";
+		var tipo="local";
+		var update=false;
+		var nome;
+		var lat;
+		var lng;
+				
+		if(value==0 )
+		{	
+			nome=$("#origem").val();
+			lat=$("#origem").attr("lat");
+			lng=$("#origem").attr("lng");
+			if($("#origem").attr("interesse")=="true")
+				var i=$("#origem").attr("pos"); 
+		}
+		else if(value==9 ) 
+		{		
+			nome=$("#destino").val();
+			lat=$("#destino").attr("lat");
+			lng=$("#destino").attr("lng");
+			if($("#destino").attr("interesse")=="true")
+				var i=$("#destino").attr("pos");
+		}	
+		else
+		{ 
+			nome=$("#interesse"+value).val();
+			lat=$("#interesse"+value).attr("lat");
+			lng=$("#interesse"+value).attr("lng");
+			if($("#interesse"+value).attr("interesse")=="true")
+				var i=$("#interesse"+value).attr("pos");  
+		}
+			
+		if(i)
+		{
+			descricao=pInt[i].descricao;
+			tipo=pInt[i].tipo;
+			update=true;
+			$("#pos_ponto").val(i);
+		}
+		
+		$("#nome_ponto").val(nome);
+		$("#desc_ponto").val(descricao);
+		$("#tipo_ponto").val(tipo);
+		$("#lat_ponto").val(lat);
+		$("#lng_ponto").val(lng);
+		$("#update_ponto").val(update);
+		$("#value_ponto").val(value);
+		
+		var form=$("#form_interesse");
+		
+		form.css("display","block");
+		form.offset($(this).offset());
+		
+	});
+	$("#cancelar_ponto").click(function(){	
+		$("#form_interesse").css("display","none");	
+	});
+	$("#guardar_ponto").click(function(){	
+		if($("#nome_ponto").val().trim() != "" && $("#desc_ponto").val().trim() != "")
+		{
+			$("#form_interesse").css("display","none");
+			submitGuardarPonto();
+		} 
+	});
+	
+	
+	$(".lista").on('click','.pontoInt',function(){
+		var t=$(this).attr("value");
+		var location=new google.maps.LatLng(pInt[t].lat,pInt[t].lng);
+		mapClick(location,t);
+	});
+	
+	
+	$.validator.setDefaults({
+        ignore: []
+    });
+	$("#users").validate({
+			rules:{
+				idade:{required:true, digits:true},
+				altura:{required:true, digits:true},
+				peso:{required:true, digits:true}
+			},
+			messages:{
+				idade:"",
+				altura:"",
+				peso:""
+			}
+		});
+	$("#botaoAdicionarUser").click(function(){
+		if($("#users").valid() && $("#nome").val().trim()!="")
+		{
+			saveUserData();
+		}
+	});
+	$("#users").change(function(){
+		if($("#users").valid() && G_pontos.length>=2 && G_result!=undefined){
+			 processaResultados();
+		}
+	});
+	
+	$("#botaoActualizarRota").click(function(){
+		if(G_pontos.length>1 && $("#nomeRota").val().trim()!="")
+		{	var value=$("#rotas").val();
+			actualizarRota(value);
+			criaComboBoxRotas();
+			$("#rotas").val(value).change();
+		}
+	});
+	$("#botaoActualizarUser").click(function(){
+		if($("#users").valid() && $("#nome").val().trim()!="")
+		{
+			var value=$("#comboUser").val();
+			updateUserData(value);
+			$("#comboUser").val(value).change();
+		}
+	});
+	</script>
